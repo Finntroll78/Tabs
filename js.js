@@ -1,30 +1,36 @@
-let clock = document.querySelector('.clock');
+window.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+    let tab = document.querySelectorAll('.info-header-tab'),
+        info = document.querySelector('.info-header'),
+        tabContent = document.querySelectorAll('.info-tabcontent');
 
+    function hideTabContent(a) {
+        for (let i = a; i < tabContent.length; i++) {
+            tabContent[i].classList.remove('show');
+            tabContent[i].classList.add('hide');
+        }
+    }
 
-function clockTime() {
-    let time = new Date(),
-        h = time.getHours().toString(),
-        m = time.getMinutes().toString(),
-        s = time.getSeconds().toString();
+    hideTabContent(1);
 
+    function showTabContent(b) {
+        if (tabContent[b].classList.contains('hide')) {
+            tabContent[b].classList.remove('hide');
+            tabContent[b].classList.add('show');
+        }
+    }
 
+    info.addEventListener('click', function(event) {
+        let target = event.target;
+        if (target && target.classList.contains('info-header-tab')) {
+            for (let i = 0; i < tab.length; i++) {
+                if (target == tab[i]) {
+                    hideTabContent(0);
+                    showTabContent(i);
+                    breack;
+                }
+            }
+        }
+    })
 
-    if (h.length < 2) {
-        h = '0' + h;
-    };
-
-    if (m.length < 2) {
-        m = '0' + m;
-    };
-
-    if (s.length < 2) {
-        s = '0' + s;
-    };
-
-    let clockString = h + ':' + m + ':' + s;
-
-    clock.textContent = clockString;
-
-}
-
-setInterval(clockTime, 1000)
+});
